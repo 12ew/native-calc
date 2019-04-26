@@ -23,41 +23,61 @@ export default class CalculatorScreen extends Component {
 		this.calc = new global.swisscalc.calc.calculator();
 	}
 
+	// Occurs when a digit is pressed
+	onDigitPress = digit => {
+		this.calc.addDigit(digit);
+		this.setState({
+			display: this.calc.getMainDisplay()
+		});
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.displayContainer}>
 					<CalcDisplay display={this.state.display} />
 				</View>
-				<View>
+				<View style={styles.buttonContainer}>
 					<View style={styles.buttonRow}>
-						<CalcButton title="C" color="red" backgroundColor="yellow" />
-						<CalcButton title="+/-" color="red" backgroundColor="yellow" />
-						<CalcButton title="%" color="red" backgroundColor="yellow" />
-						<CalcButton title="/" color="red" backgroundColor="yellow" />
+						<CalcButton title="C" color="#1C1C1C" backgroundColor="#D4D4D2" />
+						<CalcButton title="+/-" color="#1C1C1C" backgroundColor="#D4D4D2" />
+						<CalcButton title="%" color="#1C1C1C" backgroundColor="#D4D4D2" />
+						<CalcButton title="/" color="white" backgroundColor="#FF9500" />
 					</View>
 					<View style={styles.buttonRow}>
-						<CalcButton title="7" color="red" backgroundColor="yellow" />
-						<CalcButton title="8" color="red" backgroundColor="yellow" />
-						<CalcButton title="9" color="red" backgroundColor="yellow" />
-						<CalcButton title="x" color="red" backgroundColor="yellow" />
+						<CalcButton
+							onPress={() => {
+								this.onDigitPress('7');
+							}}
+							title="7"
+							color="white"
+							backgroundColor="#555555"
+						/>
+						<CalcButton title="8" color="white" backgroundColor="#555555" />
+						<CalcButton title="9" color="white" backgroundColor="#555555" />
+						<CalcButton title="x" color="white" backgroundColor="#FF9500" />
 					</View>
 					<View style={styles.buttonRow}>
-						<CalcButton title="4" color="red" backgroundColor="yellow" />
-						<CalcButton title="5" color="red" backgroundColor="yellow" />
-						<CalcButton title="6" color="red" backgroundColor="yellow" />
-						<CalcButton title="-" color="red" backgroundColor="yellow" />
+						<CalcButton title="4" color="white" backgroundColor="#555555" />
+						<CalcButton title="5" color="white" backgroundColor="#555555" />
+						<CalcButton title="6" color="white" backgroundColor="#555555" />
+						<CalcButton title="-" color="white" backgroundColor="#FF9500" />
 					</View>
 					<View style={styles.buttonRow}>
-						<CalcButton title="1" color="red" backgroundColor="yellow" />
-						<CalcButton title="2/-" color="red" backgroundColor="yellow" />
-						<CalcButton title="3" color="red" backgroundColor="yellow" />
-						<CalcButton title="+" color="red" backgroundColor="yellow" />
+						<CalcButton title="1" color="white" backgroundColor="#555555" />
+						<CalcButton title="2" color="white" backgroundColor="#555555" />
+						<CalcButton title="3" color="white" backgroundColor="#555555" />
+						<CalcButton title="+" color="white" backgroundColor="#FF9500" />
 					</View>
 					<View style={styles.buttonRow}>
-						<CalcButton title="0" color="red" backgroundColor="yellow" />
-						<CalcButton title="." color="red" backgroundColor="yellow" />
-						<CalcButton title="=" color="red" backgroundColor="yellow" />
+						<CalcButton
+							title="0"
+							color="white"
+							backgroundColor="#555555"
+							style={{ flex: 2 }}
+						/>
+						<CalcButton title="." color="white" backgroundColor="#555555" />
+						<CalcButton title="=" color="white" backgroundColor="#FF9500" />
 					</View>
 				</View>
 			</View>
@@ -66,7 +86,8 @@ export default class CalculatorScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-	container: { flex: 1 },
+	container: { flex: 1, backgroundColor: 'black' },
 	displayContainer: { flex: 1, justifyContent: 'flex-end' },
+	buttonContainer: { paddingBottom: 20 },
 	buttonRow: { flexDirection: 'row', justifyContent: 'space-between' }
 });
